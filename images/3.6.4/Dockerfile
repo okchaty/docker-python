@@ -6,6 +6,9 @@ ENV BUILD_DEPS  \
   libbz2-dev \
   libsasl2-dev \
   libxml2-dev \
+  # python tbk
+  libxmlsec1-dev \
+  libxmlsec1-openssl \
   binutils \
   libproj-dev \
   gdal-bin \
@@ -19,7 +22,7 @@ ENV RUNTIME_DEPS curl \
   git-core
 
 RUN apt-get update -y \
-  && apt install -y --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS \
+  && apt-get install -y --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS \
   && apt-get clean \
-  && apt-get purge -y --auto-remove $BUILD_DEPS \
+  && apt-get purge -y --auto-remove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
