@@ -2,7 +2,7 @@ FROM python:3.6.5
 
 MAINTAINER Luis Mayta <@slovacus>
 
-ENV BUILD_DEPS  \
+ENV LIBRARY_DEPS  \
   libbz2-dev \
   libsasl2-dev \
   libxml2-dev \
@@ -19,10 +19,11 @@ ENV BUILD_DEPS  \
   libevdev2
 
 ENV RUNTIME_DEPS curl \
-  git-core
+  git-core \
+  gcc
 
 RUN apt-get update -y \
-  && apt install -y --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS \
+  && apt install -y --no-install-recommends $LIBRARY_DEPS $RUNTIME_DEPS \
   && apt-get clean \
-  && apt-get purge -y --auto-remove $BUILD_DEPS \
+  && apt-get purge -y --auto-remove $LIBRARY_DEPS \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
