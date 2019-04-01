@@ -16,14 +16,16 @@ ENV LIBRARY_DEPS  \
   zlib1g-dev \
   # bjoern
   libev-dev \
-  libevdev2
+  libevdev2 \
+  libgdal20
 
 ENV RUNTIME_DEPS curl \
   git-core \
-  gcc
+  gcc \
+  python-pycurl
 
 RUN apt-get update -y \
-  && apt install -y --no-install-recommends $LIBRARY_DEPS $RUNTIME_DEPS \
+  && apt install -y $LIBRARY_DEPS $RUNTIME_DEPS \
   && apt-get clean \
-  && apt-get purge -y --auto-remove $LIBRARY_DEPS \
+  && apt-get purge -y \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
