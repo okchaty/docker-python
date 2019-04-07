@@ -2,7 +2,7 @@ FROM python:3.6.4
 
 MAINTAINER Luis Mayta <@slovacus>
 
-ENV BUILD_DEPS  \
+ENV LIBRARY_DEPS  \
   libbz2-dev \
   libsasl2-dev \
   libxml2-dev \
@@ -16,13 +16,16 @@ ENV BUILD_DEPS  \
   zlib1g-dev \
   # bjoern
   libev-dev \
-  libevdev2
+  libevdev2 \
+  libgdal20
 
 ENV RUNTIME_DEPS curl \
-  git-core
+  git-core \
+  gcc \
+  python-pycurl
 
 RUN apt-get update -y \
-  && apt-get install -y --no-install-recommends $BUILD_DEPS $RUNTIME_DEPS \
+  && apt install -y $LIBRARY_DEPS $RUNTIME_DEPS \
   && apt-get clean \
-  && apt-get purge -y --auto-remove \
+  && apt-get purge -y \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
